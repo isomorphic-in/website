@@ -53,4 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // 4. Founder Avatar Fallback check
+    document.querySelectorAll(".founder-avatar-img").forEach(img => {
+        if (img.complete && img.naturalWidth === 0) {
+            img.style.display = "none";
+            if (img.nextElementSibling) img.nextElementSibling.style.display = "flex";
+        }
+    });
+
 });

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/isomorphic-icon.png">
+    <title>Page Not Found | Isomorphic AI</title>
+    <meta name="description" content="The page you are looking for could not be found. Return to Isomorphic AI homepage.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Minimal Header Navigation -->
+    <header class="site-header" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo" aria-label="Isomorphic AI Home">
+                <img src="assets/isomorphic-icon.png" alt="Isomorphic Emblem" class="site-logo-icon" width="28" height="28">
+                <span class="logo-text">isomorphic<span class="dot-in">.ai</span></span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html#services">Services</a>
+                <a href="index.html#platform">Platform</a>
+                <a href="index.html#solutions">Solutions</a>
+                <a href="index.html#founders">Founders</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="index.html" class="btn btn-secondary btn-sm">
+                    &larr; Back to Home
+                </a>
+            </div>
+
+            <button class="mobile-menu-toggle" aria-label="Toggle Menu" type="button">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Error Content Section -->
+        <section class="error-section">
+            <div class="container">
+                <div class="error-card">
+                    
+                    <div class="error-code-badge" id="error-badge">
+                        <span class="error-code-dot"></span>
+                        <span id="error-badge-text">HTTP 404 &bull; Resource Not Found</span>
+                    </div>
+
+                    <h1 class="error-title" id="error-heading">
+                        We couldn’t find the page you were looking for.
+                    </h1>
+
+                    <p class="error-description" id="error-message">
+                        The link you followed may be broken, outdated, or the page might have been relocated during our recent platform updates.
+                    </p>
+
+                    <div class="error-actions">
+                        <a href="index.html" class="btn btn-primary btn-md">
+                            &larr; Return to Homepage
+                        </a>
+                        <a href="index.html#contact" class="btn btn-secondary btn-md">
+                            Contact Support &rarr;
+                        </a>
+                    </div>
+
+                    <!-- Monospace Diagnostics Telemetry -->
+                    <div class="error-telemetry">
+                        <div><strong>Path:</strong> <span id="telemetry-path">/</span></div>
+                        <div><strong>Timestamp:</strong> <span id="telemetry-time"></span></div>
+                        <div><strong>Reference ID:</strong> <span id="telemetry-ref"></span></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Clean Footer -->
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <div class="footer-left">
+                <div class="logo">
+                    <img src="assets/isomorphic-icon.png" alt="Isomorphic Emblem" class="site-logo-icon" width="22" height="22">
+                    <span style="color:#FFFFFF;">isomorphic<span class="dot-in">.ai</span></span>
+                </div>
+                <p>Enterprise AI Chatbot Systems &amp; Managed Solutions.</p>
+            </div>
+            <div class="footer-right">
+                <a href="mailto:isomorphicofficial@gmail.com">isomorphicofficial@gmail.com</a>
+                <span>&copy; 2026 Isomorphic AI Systems. All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <!-- Error Parameter & Telemetry Script -->
+    <script>
+        (function() {
+            try {
+                // Populate path and timestamp
+                var pathEl = document.getElementById("telemetry-path");
+                var timeEl = document.getElementById("telemetry-time");
+                var refEl = document.getElementById("telemetry-ref");
+                
+                if (pathEl) pathEl.textContent = window.location.pathname + window.location.search;
+                if (timeEl) timeEl.textContent = new Date().toUTCString();
+                if (refEl) {
+                    var randRef = "iso_err_" + Math.random().toString(36).substring(2, 9) + "_" + Date.now().toString(36);
+                    refEl.textContent = randRef;
+                }
+
+                // Check for custom status codes in URL query params (?code=500, ?code=503, etc.)
+                var params = new URLSearchParams(window.location.search);
+                var code = params.get("code") || params.get("status");
+                
+                if (code === "500" || code === "502" || code === "503") {
+                    document.title = "Service Interruption | Isomorphic AI";
+                    var badge = document.getElementById("error-badge-text");
+                    var heading = document.getElementById("error-heading");
+                    var message = document.getElementById("error-message");
+                    
+                    if (badge) badge.textContent = "HTTP " + code + " • System Interruption";
+                    if (heading) heading.textContent = "We are experiencing a temporary service interruption.";
+                    if (message) message.textContent = "Our engineering team has been notified. The system is self-recovering. Please try refreshing or contact our technical team.";
+                }
+            } catch(e) {}
+        })();
+    </script>
+</body>
+</html>
