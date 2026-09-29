@@ -1,26 +1,76 @@
 /**
- * Isomorphic AI - Minimal Website Scripts
+ * Isomorphic - Website Interactive Scripts
  */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // 1. Mobile Menu Toggle
+    const navbar = document.getElementById("navbar");
     const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
     const navLinks = document.querySelector(".nav-links");
 
+    // 1. Mobile Menu Open / Close
     if (mobileMenuToggle && navLinks) {
-        mobileMenuToggle.addEventListener("click", () => {
-            navLinks.classList.toggle("active");
+        mobileMenuToggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const isActive = navLinks.classList.toggle("active");
+            mobileMenuToggle.setAttribute("aria-expanded", isActive ? "true" : "false");
         });
 
-        navLinks.querySelectorAll("a").forEach(link => {
-            link.addEventListener("click", () => {
+        // Close mobile menu on click outside
+        document.addEventListener("click", (e) => {
+            if (navLinks.classList.contains("active") && !navLinks.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
                 navLinks.classList.remove("active");
-            });
+                mobileMenuToggle.setAttribute("aria-expanded", "false");
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && navLinks.classList.contains("active")) {
+                navLinks.classList.remove("active");
+                mobileMenuToggle.setAttribute("aria-expanded", "false");
+            }
         });
     }
 
-    // 2. FAQ Accordion Toggle
+    // 2. Reliable Anchor Navigation & Smooth Scrolling
+    const internalLinks = document.querySelectorAll('a[href^="#"]');
+    internalLinks.forEach(link => {
+        link.addEventListener("click", (e) => {
+            const href = link.getAttribute("href");
+            if (!href || href === "#") return;
+
+            const targetEl = document.querySelector(href);
+            if (targetEl) {
+                e.preventDefault();
+
+                // Close mobile menu if open
+                if (navLinks && navLinks.classList.contains("active")) {
+                    navLinks.classList.remove("active");
+                    if (mobileMenuToggle) {
+                        mobileMenuToggle.setAttribute("aria-expanded", "false");
+                    }
+                }
+
+                // Calculate scroll position accounting for sticky header height
+                const headerOffset = navbar ? navbar.offsetHeight + 10 : 70;
+                const elementPosition = targetEl.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+
+                // Update URL hash without jumping
+                if (history.pushState) {
+                    history.pushState(null, null, href);
+                }
+            }
+        });
+    });
+
+    // 3. FAQ Accordion Toggle
     const faqItems = document.querySelectorAll(".faq-item");
     faqItems.forEach(item => {
         const questionBtn = item.querySelector(".faq-question");
@@ -40,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 3. Contact Form Submission
+    // 4. Contact Form Submission
     const contactForm = document.getElementById("contact-form");
     const contactSuccess = document.getElementById("contact-success");
 
@@ -53,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 4. Founder Avatar Fallback check
+    // 5. Founder Avatar Fallback check
     document.querySelectorAll(".founder-avatar-img").forEach(img => {
         if (img.complete && img.naturalWidth === 0) {
             img.style.display = "none";

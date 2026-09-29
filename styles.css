@@ -88,6 +88,11 @@ a:hover {
 
 section {
     padding: 5rem 0;
+    scroll-margin-top: 4.8rem;
+}
+
+[id] {
+    scroll-margin-top: 4.8rem;
 }
 
 @media (max-width: 768px) {
@@ -236,7 +241,7 @@ section {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 1.4rem;
+    gap: 1.2rem;
 }
 
 .nav-links a {
@@ -244,6 +249,12 @@ section {
     font-weight: 500;
     color: var(--color-text-muted);
     transition: var(--transition-smooth);
+    padding: 0.45rem 0.35rem;
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    border-radius: 4px;
 }
 
 .nav-links a:hover {
@@ -260,12 +271,23 @@ section {
 .mobile-menu-toggle {
     display: none;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 5px;
-    background: none;
+    background: transparent;
     border: none;
     cursor: pointer;
-    padding: 0.4rem;
-    z-index: 1001;
+    padding: 0.5rem;
+    width: 38px;
+    height: 38px;
+    border-radius: 6px;
+    z-index: 1003;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-menu-toggle:hover,
+.mobile-menu-toggle:focus {
+    background-color: var(--color-bg-secondary);
 }
 
 .mobile-menu-toggle span {
@@ -273,6 +295,7 @@ section {
     height: 2px;
     background: var(--color-primary);
     transition: var(--transition-smooth);
+    display: block;
 }
 
 @media (max-width: 1040px) {
@@ -284,14 +307,28 @@ section {
         right: 0;
         background: #FFFFFF;
         flex-direction: column;
-        padding: 1.75rem 1.5rem;
+        padding: 1.25rem 1.5rem 1.75rem 1.5rem;
         border-bottom: 1px solid var(--color-border);
-        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
-        gap: 1.1rem;
-        align-items: flex-start;
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+        gap: 0.4rem;
+        align-items: stretch;
+        z-index: 1002;
+        pointer-events: auto;
     }
     .nav-links.active { 
         display: flex; 
+    }
+    .nav-links a {
+        font-size: 0.95rem;
+        padding: 0.7rem 0.75rem;
+        display: block;
+        width: 100%;
+        border-radius: 6px;
+    }
+    .nav-links a:hover,
+    .nav-links a:active {
+        background-color: var(--color-bg-secondary);
+        color: var(--color-primary);
     }
     .mobile-menu-toggle { 
         display: flex; 
