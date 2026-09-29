@@ -1,13 +1,13 @@
-# Isomorphic AI - Student Services & Campus Platform
+# Isomorphic - Enterprise AI Chatbot Platform
 
-Next-Gen AI Student Services & Higher Education Support Platform website.
+Enterprise Conversational AI & Intelligent Chatbot Platform website (`isomorphic.in`).
 
 ## Sections
-- **Hero & Trust Metrics**: High-accuracy AI Student Services overview with FERPA & institutional governance highlights.
-- **Administrative Portal & Chatbot Showcase**: Live telemetry, student inquiry deflection, audit archive, and embeddable student widget.
-- **Student Services Capabilities**: Admissions & Enrollment, Financial Aid & Bursar, Academic Advising & Registrar, Campus IT & Helpdesk, Policy & Catalog Synchronization, CSAT & Advisor Escalation.
-- **Stakeholder Workflows**: Tailored for Admissions, Financial Aid, Academic Advising, Campus IT, Residence Life, and Career Centers.
-- **Turnkey Deployment**: 4-step university deployment pipeline.
-- **FERPA & Compliance**: Isolated vector tenants, no public LLM training, deterministic citations, PII redaction.
-- **FAQ & Founders**: Higher-Ed institutional FAQ and leadership team profiles.
-- **Institutional Consultation**: Lead capture for university demo and catalog ingestion.
+- **Hero & Trust Metrics**: High-accuracy custom AI chatbots trained on proprietary business data with private vector isolation.
+- **Administrative Portal & Chatbot Showcase**: Live telemetry, deflection trends, conversation audit archive, and embeddable chatbot widget.
+- **Full-Stack Capabilities**: Proprietary Ingestion & RAG, Voice & Web Widget Embed, Admin Portal & Telemetry, Strict Guardrails & Safety, Automated Continuous Sync, Lead Capture & CSAT Feedback.
+- **Industry Solutions**: Higher Education, E-Commerce & Retail, SaaS & Tech Platforms, Healthcare & Clinics, Finance & Compliance, B2B & Enterprise Services.
+- **Turnkey Deployment**: 4-step deployment pipeline from documentation to active assistant.
+- **Enterprise Security**: Isolated vector tenants, no public LLM training, deterministic citations, automated PII redaction.
+- **FAQ & Leadership**: Common enterprise questions and founder profiles.
+- **Consultation & Lead Capture**: Direct inquiry and demo request form.
