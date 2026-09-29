@@ -8,9 +8,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
     const navLinks = document.querySelector(".nav-links");
 
-    // 1. Mobile Menu Open / Close
+    // 1. Mobile Menu Open / Close Toggle
     if (mobileMenuToggle && navLinks) {
         mobileMenuToggle.addEventListener("click", (e) => {
+            e.preventDefault();
             e.stopPropagation();
             const isActive = navLinks.classList.toggle("active");
             mobileMenuToggle.setAttribute("aria-expanded", isActive ? "true" : "false");
@@ -34,13 +35,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 2. Reliable Anchor Navigation & Smooth Scrolling
-    const internalLinks = document.querySelectorAll('a[href^="#"]');
-    internalLinks.forEach(link => {
-        link.addEventListener("click", (e) => {
-            const href = link.getAttribute("href");
-            if (!href || href === "#") return;
+    // Select all links that point to an ID on the current page
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(link => {
+        link.addEventListener("click", function(e) {
+            const href = this.getAttribute("href");
+            if (!href || href === "#" || href.length <= 1) return;
 
-            const targetEl = document.querySelector(href);
+            const targetId = href.substring(1);
+            const targetEl = document.getElementById(targetId);
+
             if (targetEl) {
                 e.preventDefault();
 
@@ -52,19 +56,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 }
 
-                // Calculate scroll position accounting for sticky header height
-                const headerOffset = navbar ? navbar.offsetHeight + 10 : 70;
-                const elementPosition = targetEl.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
+                // Smoothly scroll to the target element
+                targetEl.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
                 });
 
-                // Update URL hash without jumping
-                if (history.pushState) {
-                    history.pushState(null, null, href);
+                // Update browser URL hash cleanly
+                if (window.history && window.history.pushState) {
+                    window.history.pushState(null, null, href);
                 }
             }
         });
