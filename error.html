@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=3.1">
 </head>
 <body>
 
@@ -19,7 +19,7 @@
     <header class="site-header" id="navbar">
         <div class="container nav-container">
             <a href="index.html" class="logo" aria-label="Isomorphic Home">
-                <img src="assets/isomorphic-icon.png" alt="Isomorphic Emblem" class="site-logo-icon" width="28" height="28">
+                <img src="assets/isomorphic-icon.png" alt="Isomorphic Emblem" class="site-logo-icon" width="26" height="26">
                 <span class="logo-text">isomorphic<span class="dot-in">.in</span></span>
             </a>
 
@@ -39,8 +39,11 @@
                     &larr; Back to Home
                 </a>
                 <button class="mobile-menu-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="nav-menu" type="button">
-                    <span></span>
-                    <span></span>
+                    <span class="toggle-bars">
+                        <span></span>
+                        <span></span>
+                    </span>
+                    <span>Menu</span>
                 </button>
             </div>
         </div>
@@ -103,7 +106,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=3.1"></script>
 
     <!-- Error Parameter & Telemetry Script -->
     <script>
