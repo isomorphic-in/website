@@ -23,10 +23,13 @@
                 <span class="logo-text">isomorphic<span class="dot-in">.in</span></span>
             </a>
 
-            <nav class="nav-links">
-                <a href="index.html#services">Services</a>
+            <nav class="nav-links" id="nav-menu">
                 <a href="index.html#platform">Platform</a>
+                <a href="index.html#services">Services</a>
                 <a href="index.html#solutions">Solutions</a>
+                <a href="index.html#process">How It Works</a>
+                <a href="index.html#security">Security</a>
+                <a href="index.html#faq">FAQ</a>
                 <a href="index.html#founders">Leadership</a>
                 <a href="index.html#contact">Contact</a>
             </nav>
@@ -35,12 +38,11 @@
                 <a href="index.html" class="btn btn-secondary btn-sm">
                     &larr; Back to Home
                 </a>
+                <button class="mobile-menu-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="nav-menu" type="button">
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
-
-            <button class="mobile-menu-toggle" aria-label="Toggle Menu" type="button">
-                <span></span>
-                <span></span>
-            </button>
         </div>
     </header>
 
@@ -88,10 +90,10 @@
     <footer class="site-footer">
         <div class="container footer-container">
             <div class="footer-left">
-                <div class="logo">
+                <a href="index.html" class="logo" style="color:#FFFFFF;" aria-label="Isomorphic">
                     <img src="assets/isomorphic-icon.png" alt="Isomorphic Emblem" class="site-logo-icon" width="22" height="22">
                     <span style="color:#FFFFFF;">isomorphic<span class="dot-in">.in</span></span>
-                </div>
+                </a>
                 <p>Enterprise Conversational AI Systems &amp; Managed Platform.</p>
             </div>
             <div class="footer-right">
