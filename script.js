@@ -1,7 +1,34 @@
-/**
- * Isomorphic - Enterprise AI Platform Interactive Scripts
- * Handles Navigation, Smooth Scrolling, Scrollspy, Mobile Drawer, FAQ Accordion, and Lead Form.
- */
+// --------------------------------------------------------------------------
+// Global Showcase Tab Switcher (Exposed globally for direct onclick and listeners)
+// --------------------------------------------------------------------------
+window.switchShowcaseTab = function(targetTabId) {
+    if (!targetTabId) return;
+
+    const tabButtons = document.querySelectorAll(".showcase-tab-btn");
+    const tabPanels = document.querySelectorAll(".showcase-tab-panel");
+
+    tabButtons.forEach(function(btn) {
+        const isMatch = btn.getAttribute("data-tab") === targetTabId;
+        if (isMatch) {
+            btn.classList.add("active");
+            btn.setAttribute("aria-selected", "true");
+        } else {
+            btn.classList.remove("active");
+            btn.setAttribute("aria-selected", "false");
+        }
+    });
+
+    tabPanels.forEach(function(panel) {
+        const isMatch = panel.getAttribute("id") === targetTabId;
+        if (isMatch) {
+            panel.classList.add("active");
+            panel.style.setProperty("display", "block", "important");
+        } else {
+            panel.classList.remove("active");
+            panel.style.setProperty("display", "none", "important");
+        }
+    });
+};
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -224,4 +251,81 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // --------------------------------------------------------------------------
+    // 7. Interactive Showcase Tabs Navigation (Unified Global Event Delegation)
+    // --------------------------------------------------------------------------
+    document.addEventListener("click", (e) => {
+        const btn = e.target.closest(".showcase-tab-btn");
+        if (btn) {
+            e.preventDefault();
+            const targetTabId = btn.getAttribute("data-tab");
+            if (targetTabId) {
+                window.switchShowcaseTab(targetTabId, btn);
+            }
+        }
+    });
+
+    // --------------------------------------------------------------------------
+    // 8. High-Resolution Screenshot Lightbox Modal
+    // --------------------------------------------------------------------------
+    const lightboxModal = document.getElementById("screenshot-lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const lightboxTitle = document.getElementById("lightbox-title");
+    const lightboxClose = document.getElementById("lightbox-close");
+
+    const openLightbox = (imgSrc, titleText) => {
+        if (!lightboxModal || !lightboxImg) return;
+        lightboxImg.src = imgSrc;
+        if (lightboxTitle) lightboxTitle.textContent = titleText || "Isomorphic AI Platform";
+        lightboxModal.classList.add("active");
+        lightboxModal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+    };
+
+    const closeLightbox = () => {
+        if (!lightboxModal) return;
+        lightboxModal.classList.remove("active");
+        lightboxModal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+    };
+
+    // Zoom Buttons click
+    document.querySelectorAll(".zoom-hint-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const imgSrc = btn.getAttribute("data-img");
+            const title = btn.getAttribute("data-title");
+            if (imgSrc) openLightbox(imgSrc, title);
+        });
+    });
+
+    // Clickable screenshots
+    document.querySelectorAll(".zoomable-screenshot").forEach(img => {
+        img.style.cursor = "zoom-in";
+        img.addEventListener("click", () => {
+            const imgSrc = img.getAttribute("data-img") || img.getAttribute("src");
+            const title = img.getAttribute("data-title") || img.getAttribute("alt");
+            if (imgSrc) openLightbox(imgSrc, title);
+        });
+    });
+
+    if (lightboxClose) {
+        lightboxClose.addEventListener("click", closeLightbox);
+    }
+
+    if (lightboxModal) {
+        lightboxModal.addEventListener("click", (e) => {
+            if (e.target === lightboxModal || e.target.classList.contains("lightbox-wrapper") === false && !e.target.closest(".lightbox-wrapper")) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && lightboxModal.classList.contains("active")) {
+                closeLightbox();
+            }
+        });
+    }
+
 });
+
